@@ -23,6 +23,7 @@ public class Query {
         this.description = description;
         this.metricType = metricType;
         this.db_port = db_port;
+        Query.queries.add(this);
     }
 
     @Override
