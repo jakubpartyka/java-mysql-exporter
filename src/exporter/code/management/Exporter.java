@@ -16,6 +16,7 @@ public class Exporter {
     public static HashMap<Query,SimpleCollector> collectors = new HashMap<>();
 
     public static Counter counter_errors = Counter.build().namespace(Config.EXPORTER_NAMESPACE).name("counter_errors").help("Total number of errors").register();
+    public static Counter counter_queries_executed = Counter.build().namespace(Config.EXPORTER_NAMESPACE).name("counter_queries_executed").help("Total number of queries sent to the database").register();
 
     public static void createMetrics(){
         Logger.log("exporter creating metrics",LogLevel.DEBUG);

@@ -11,6 +11,7 @@ public class DatabaseConnector {
         Connection connection = connect(query);
         PreparedStatement statement = connection.prepareStatement(query.statement);
         ResultSet resultSet = statement.executeQuery();
+        Exporter.counter_queries_executed.inc();
         double result = -1;
         if (resultSet.next())
             result = resultSet.getDouble(1);
