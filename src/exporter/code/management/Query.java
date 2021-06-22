@@ -1,6 +1,7 @@
 package exporter.code.management;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Query {
     public static ArrayList<Query> queries = new ArrayList<>();
@@ -22,6 +23,19 @@ public class Query {
         this.description = description;
         this.metricType = metricType;
         this.db_port = db_port;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Query query1 = (Query) o;
+        return db_port == query1.db_port && Objects.equals(db_address, query1.db_address) && Objects.equals(db_name, query1.db_name) && Objects.equals(db_user, query1.db_user) && Objects.equals(db_pass, query1.db_pass) && Objects.equals(query, query1.query) && Objects.equals(name, query1.name) && Objects.equals(namespace, query1.namespace) && Objects.equals(description, query1.description) && metricType == query1.metricType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(db_address, db_name, db_user, db_pass, query, name, namespace, description, metricType, db_port);
     }
 
     @Override
