@@ -15,7 +15,7 @@ public class Config {
     public static String QUERIES_FILE_PATH = "queries";
     public static int EXPOSE_PORT = 20026;
     public static LogLevel LOG_LEVEL = LogLevel.INFO;
-    public static String EXPORTER_NAMESPACE = "java-mysql-exporter";
+    public static String EXPORTER_NAMESPACE = "java_mysql_exporter";
     public static long INTERVAL = 30*1000;
 
     public static void readConfig() throws IOException {
@@ -39,15 +39,17 @@ public class Config {
         BufferedReader reader = new BufferedReader(new FileReader(QUERIES_FILE_PATH));
         String line = reader.readLine();
         while (line != null){
-            if (line.startsWith("#")){
+            if (line.isBlank() || line.startsWith("#")){
                 line = reader.readLine();
                 continue;
             }
+
             String [] data = line.split(";");
             System.out.println(Arrays.toString(data));
 
-            if(data.length != 9){
+            if(data.length != 10){
                 Logger.log("malformed query line (skipping): " + line,LogLevel.WARN);
+                continue;
             }
             String address = data[0];
             int port = Integer.parseInt(data[1]);
@@ -62,7 +64,6 @@ public class Config {
 
             Query query1 = new Query(address,db_name,user,pass,query,name,namespace,description,type,port);
             Logger.log("query created: " + query1,LogLevel.DEBUG);
-
 
             line = reader.readLine();
         }
