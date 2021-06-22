@@ -2,9 +2,12 @@ package exporter.code.management;
 
 import exporter.code.logging.LogLevel;
 import exporter.code.logging.Logger;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Properties;
 
 public class Config {
@@ -28,5 +31,40 @@ public class Config {
 
 
         Logger.log("config read from " + config.getAbsolutePath(), LogLevel.INFO);
+    }
+
+    public static void readQueries() throws IOException{
+        BufferedReader reader = new BufferedReader(new FileReader(QUERIES_FILE_PATH));
+        String line = reader.readLine();
+        while (line != null){
+            if (line.startsWith("#")){
+                line = reader.readLine();
+                continue;
+            }
+            String [] data = line.split(";");
+            System.out.println(Arrays.toString(data));
+
+            if(data.length != 9){
+                Logger.log("malformed query line (skipping): " + line,LogLevel.WARN);
+            }
+            String address = data[0];
+            int port = Integer.parseInt(data[1]);
+            String user = data[2];
+            String pass = data[3];
+            String db_name = data[4];
+            MetricType type = MetricType.valueOf(data[5].toUpperCase(Locale.ROOT));
+            String name = data[6];
+            String namespace = data[7];
+            String description = data[8];
+            String query = data[9];
+
+            Query query1 = new Query(address,db_name,user,pass,query,name,namespace,description,type,port);
+            Logger.log("query created: " + query1,LogLevel.DEBUG);
+
+
+            line = reader.readLine();
+        }
+
+        Logger.log("queries read from " + QUERIES_FILE_PATH,LogLevel.INFO);
     }
 }
