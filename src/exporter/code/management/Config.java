@@ -16,6 +16,7 @@ public class Config {
     public static int EXPOSE_PORT = 20026;
     public static LogLevel LOG_LEVEL = LogLevel.INFO;
     public static String EXPORTER_NAMESPACE = "java-mysql-exporter";
+    public static long INTERVAL = 30*1000;
 
     public static void readConfig() throws IOException {
         File config = new File(CONFIG_PATH);
@@ -26,6 +27,7 @@ public class Config {
 
         LOG_LEVEL = LogLevel.valueOf(prop.getProperty("LOG_LEVEL",LOG_LEVEL.name()));
         EXPOSE_PORT = Integer.parseInt(prop.getProperty("EXPOSE_PORT", String.valueOf(EXPOSE_PORT)));
+        INTERVAL = Integer.parseInt(prop.getProperty("INTERVAL", String.valueOf(INTERVAL)));
         EXPORTER_NAMESPACE = prop.getProperty("EXPORTER_NAMESPACE", EXPORTER_NAMESPACE);
         QUERIES_FILE_PATH = prop.getProperty("QUERIES_FILE_PATH", QUERIES_FILE_PATH);
 
