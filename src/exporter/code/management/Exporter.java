@@ -18,6 +18,13 @@ public class Exporter {
     public static Counter counter_errors = Counter.build().namespace(Config.EXPORTER_NAMESPACE).name("counter_errors").help("Total number of errors").register();
 
     public static void createMetrics(){
+        Logger.log("exporter creating metrics",LogLevel.DEBUG);
+
+        if (Query.queries.isEmpty()){
+            Logger.log("no queries found!",LogLevel.WARN);
+            return;
+        }
+
         for (Query q : Query.queries) {
             if (q.metricType == MetricType.GAUGE){
                 Gauge collector = Gauge.build().namespace(q.namespace).name(q.name).help(q.description).register();
@@ -33,6 +40,7 @@ public class Exporter {
     }
 
     public static void setMetricValue(Query query, double value){
+        Logger.log("setting value " + value + " for metric " + query.name,LogLevel.DEBUG);
         Collector collector = collectors.get(query);
         switch (query.metricType){
             case GAUGE ->
