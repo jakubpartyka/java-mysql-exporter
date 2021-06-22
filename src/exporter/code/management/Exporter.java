@@ -32,7 +32,7 @@ public class Exporter {
         }
     }
 
-    public static void setMetricValue(Query query,int value){
+    public static void setMetricValue(Query query, double value){
         Collector collector = collectors.get(query);
         switch (query.metricType){
             case GAUGE ->
