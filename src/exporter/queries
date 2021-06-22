@@ -1,4 +1,0 @@
-# queries file format:
-# DB_ADDRESS ; DB_PASS ; DB_USER ; DB_NAME ; QUERY ; TYPE
-# example:
-# localhost;pass123!;database_user;my_db;select count(*) from users;gauge
