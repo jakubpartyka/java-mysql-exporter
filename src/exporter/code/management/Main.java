@@ -1,7 +1,7 @@
 package exporter.code.management;
+
 import exporter.code.logging.LogLevel;
 import exporter.code.logging.Logger;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -13,6 +13,7 @@ public class Main {
         Exporter.start();
 
         while (true){
+            Logger.log("executing queries ...",LogLevel.TRACE);
             for (Query query : Query.queries) {
                 try {
                     double val = DatabaseConnector.executeQuery(query);
@@ -22,7 +23,7 @@ public class Main {
                     e.printStackTrace();
                 }
             }
-
+            Logger.log("iteration complete. next iteration in " + (Config.INTERVAL/1000) + " seconds",LogLevel.TRACE);
             Thread.sleep(Config.INTERVAL);
         }
 
