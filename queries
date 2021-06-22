@@ -1,4 +1,5 @@
 # queries file format:
-# DB_ADDRESS ; DB_PORT ; DB_PASS ; DB_USER ; DB_NAME ; TYPE ; NAMESPACE ; DESCRIPTION ; QUERY
+# DB_ADDRESS ; DB_PORT ; DB_USER ; DB_PASS ; DB_NAME ; TYPE ; NAME ; NAMESPACE ; DESCRIPTION ; QUERY
 # example:
-# localhost;pass123!;3306;database_user;my_db;gauge,scanner,number of users,select count(*) from users
+# localhost;pass123!;3306;database_user;my_db;gauge;scanner;number of users;select count(*) from users;
+localhost!;3306;database_user;pass123;my_db;gauge;metric_name;scanner;number of users;select count(*) from users
