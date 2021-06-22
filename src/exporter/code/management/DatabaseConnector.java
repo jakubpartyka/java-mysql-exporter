@@ -2,7 +2,6 @@ package exporter.code.management;
 
 import exporter.code.logging.LogLevel;
 import exporter.code.logging.Logger;
-
 import java.sql.*;
 
 public class DatabaseConnector {

@@ -10,7 +10,6 @@ import io.prometheus.client.exporter.HTTPServer;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 @SuppressWarnings("rawtypes")
 public class Exporter {
     public static HashMap<Query,SimpleCollector> collectors = new HashMap<>();

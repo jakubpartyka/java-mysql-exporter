@@ -31,7 +31,6 @@ public class Config {
         EXPORTER_NAMESPACE = prop.getProperty("EXPORTER_NAMESPACE", EXPORTER_NAMESPACE);
         QUERIES_FILE_PATH = prop.getProperty("QUERIES_FILE_PATH", QUERIES_FILE_PATH);
 
-
         Logger.log("config read from " + config.getAbsolutePath(), LogLevel.INFO);
     }
 
@@ -51,6 +50,7 @@ public class Config {
                 Logger.log("malformed query line (skipping): " + line,LogLevel.WARN);
                 continue;
             }
+
             String address = data[0];
             int port = Integer.parseInt(data[1]);
             String user = data[2];

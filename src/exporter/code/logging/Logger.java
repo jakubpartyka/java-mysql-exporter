@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 public class Logger {
     public static void log(String message, LogLevel level){
         // increment exporter's ERROR counter
-        if(level == LogLevel.ERROR)
+        if(level.value <= LogLevel.ERROR.value)
             Exporter.counter_errors.inc();
 
         if(level.value > Config.LOG_LEVEL.value)
